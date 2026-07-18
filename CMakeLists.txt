@@ -2,11 +2,13 @@ cmake_minimum_required(VERSION 3.14)
 project(vk-001)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 23)
-
+include(cmake/CPM.cmake)
 set(SRC src/main.cpp)
 set(HPP include/main.hpp)
-
-
+CPMAddPackage("gh:fmtlib/fmt#12.2.0")
+CPMAddPackage("gh:charles-lunarg/vk-bootstrap@1.4.356")
+CPMAddPackage("gh:libsdl-org/SDL#release-3.4.12")
 add_executable(${PROJECT_NAME} ${SRC} ${HPP})
+target_link_libraries(${PROJECT_NAME} fmt vk-bootstrap SDL3)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
